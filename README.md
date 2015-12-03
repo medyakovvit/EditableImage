@@ -1,0 +1,2 @@
+# EditableImage
+Qt Quick component.
