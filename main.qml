@@ -6,8 +6,8 @@ import QtQuick.Controls 1.4
 import My.EditableImage 1.0
 
 Window {
-    width: 640
-    height: 480
+    width: 800
+    height: 600
     visible: true
 
     Column{
@@ -17,32 +17,44 @@ Window {
 
         GroupBox{
             title: qsTr("RGB")
+            width: 300
+            height: 200
 
             Column{
                 anchors.fill: parent
+                anchors.margins: 5
 
-                Slider{
+                MySlider{
                     id: rSlider
+                    label: qsTr("Red:")
                     stepSize: 1.0
                     minimumValue: -15.0
                     maximumValue: 15.0
                     value: 0.0
+                    width: parent.width
+                    height: 50
                 }
 
-                Slider{
+                MySlider{
                     id: gSlider
+                    label: qsTr("Green:")
                     stepSize: 1.0
                     minimumValue: -15.0
                     maximumValue: 15.0
                     value: 0.0
+                    width: parent.width
+                    height: 50
                 }
 
-                Slider{
+                MySlider{
                     id: bSlider
+                    label: qsTr("Blue:")
                     stepSize: 1.0
                     minimumValue: -15.0
                     maximumValue: 15.0
                     value: 0.0
+                    width: parent.width
+                    height: 50
                 }
             }
         }
@@ -57,6 +69,18 @@ Window {
             onBChanged: bSlider.value = b
             width: 400
             height: 300
+
+            Rectangle{
+                border.color: "gray"
+                border.width: 2
+                color: "transparent"
+                anchors.fill: parent
+
+                Text{
+                    text: qsTr("Your image\nwill be here")
+                    anchors.centerIn: parent
+                }
+            }
         }
 
         Button{
