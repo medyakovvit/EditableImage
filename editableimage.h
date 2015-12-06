@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtQuick/QQuickItem>
 #include <QImage>
+#include <QRgb>
 
 class EditableImage : public QQuickItem
 {
@@ -37,6 +38,7 @@ public slots:
 
 protected:
     QSGNode *updatePaintNode(QSGNode *, UpdatePaintNodeData *);
+    QImage addToPixels(int r, int g, int b);
 
 protected slots:
     void needUpdate(){update();}

@@ -53,6 +53,9 @@ void EditableImage::load(const QString &fileName)
         return;
 
     mImage.load(fileName);
+    setR(0.0);
+    setG(0.0);
+    setB(0.0);
     emit imageChanged(mImage);
 }
 
@@ -63,12 +66,32 @@ QSGNode *EditableImage::updatePaintNode(QSGNode *oldNode, QQuickItem::UpdatePain
     if(mImage.isNull())
         return node;
 
-    QImage img = mImage.scaled(width(), height());
+    QImage img;
+
+    if (mR == 0 && mG == 0 && mB == 0)
+        img = mImage.scaled(width(), height());
+    else
+        img = addToPixels(mR, mG, mB).scaled(width(), height());
+
     if (!node)
         node = new EditableImageNode(img, window());
     else
         node->setImage(img);
 
     return node;
+}
+
+QImage EditableImage::addToPixels(int r, int g, int b)
+{
+    QImage img(mImage);
+    for(int i=0; i<img.height(); i++)
+        for(int j=0; j<img.width(); j++)
+        {
+            QRgb oldRgb = img.pixel(j, i);
+            img.setPixel(j, i, qRgb(qRed(oldRgb) + r,
+                                  qGreen(oldRgb) + g,
+                                   qBlue(oldRgb) + b));
+        }
+    return img;
 }
 
