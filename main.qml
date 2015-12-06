@@ -15,8 +15,46 @@ Window {
         anchors.margins: 10
         spacing: 10
 
+        GroupBox{
+            title: qsTr("RGB")
+
+            Column{
+                anchors.fill: parent
+
+                Slider{
+                    id: rSlider
+                    stepSize: 1.0
+                    minimumValue: -15.0
+                    maximumValue: 15.0
+                    value: 0.0
+                }
+
+                Slider{
+                    id: gSlider
+                    stepSize: 1.0
+                    minimumValue: -15.0
+                    maximumValue: 15.0
+                    value: 0.0
+                }
+
+                Slider{
+                    id: bSlider
+                    stepSize: 1.0
+                    minimumValue: -15.0
+                    maximumValue: 15.0
+                    value: 0.0
+                }
+            }
+        }
+
         EditableImage{
             id: editableImage
+            r: rSlider.value
+            g: gSlider.value
+            b: bSlider.value
+            onRChanged: rSlider.value = r
+            onGChanged: gSlider.value = g
+            onBChanged: bSlider.value = b
             width: 400
             height: 300
         }
